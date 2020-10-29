@@ -1,16 +1,21 @@
 language: php
 
-php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
-  - 7.3
+jobs:
+  include:
+    - php: 7.3
+      dist: xenial
+    - php: 7.4
+      dist: bionic
+    - php: nightly
+      dist: bionic
+  allow_failures:
+    - php: nightly
 
 before_install:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_script:
+  - composer self-update --2
   - composer install
 
 script: ./vendor/bin/phpunit --configuration phpunit.xml
