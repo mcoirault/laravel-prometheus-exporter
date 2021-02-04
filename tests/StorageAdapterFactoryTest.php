@@ -3,6 +3,7 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
+use Prometheus\Exception\StorageException;
 use Prometheus\Storage\APC;
 use Prometheus\Storage\InMemory;
 use Prometheus\Storage\Redis;
@@ -20,7 +21,12 @@ class StorageAdapterFactoryTest extends TestCase
     public function testMakeApcAdapter()
     {
         $factory = new StorageAdapterFactory();
-        $adapter = $factory->make('apc');
+        try {
+            $adapter = $factory->make('apc');
+        } catch (StorageException $exception) {
+            $this->markTestSkipped("APCu not enabled? Skipping test");
+            return;
+        }
         $this->assertInstanceOf(APC::class, $adapter);
     }
 

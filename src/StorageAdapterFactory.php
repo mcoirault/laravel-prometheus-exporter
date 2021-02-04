@@ -17,6 +17,8 @@ class StorageAdapterFactory
      * @param array $config
      *
      * @return Adapter
+     *
+     * @throws \Prometheus\Exception\StorageException
      */
     public function make($driver, array $config = [])
     {
