@@ -18,6 +18,7 @@
     "promphp/prometheus_client_php": "dev-master"
   },
   "require-dev": {
+    "ext-apcu": "*",
     "phpunit/phpunit": "^9.0",
     "mockery/mockery": "^1.4"
   },
